@@ -1,37 +1,54 @@
 #include <iostream>
-#include <sstream>
 
 using namespace std;
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-int verificaCasasNumero(string numero_texto, numero){
-	
-	stringstream n(numero_texto);
-    n >> numero;
-    
-    cout << length(numero_texto);
-	
-//	for(int i; i <= lenght(numero_texto); i++){
-//		cout << 
-//	}
-}
-
 
 int main(int argc, char** argv) {
-	int numero;
-	string numero_texto;
+	int numero, unidade, dezena, centena;
+
+	while(true){
+
+		cout << "Informe um numero: ";
+		cin >> numero;
 		
-	cout << "Informe um numero: ";
-	cin >> numero_texto;
-	
-    stringstream n(numero_texto);
-    n >> numero;
-    
-	
-	if(numero > 0 && numero < 1000){
-		cout << "Centenas: " << verificaCasasNumero(numero_texto, numero) << endl;
-	}else{
-		cout << "Numero invalido, reinicie o programa.";
+		if(numero > 0 && numero < 1000){
+			unidade = numero % 10;
+			dezena = ((numero - unidade) / 10) % 10;
+			centena = ((numero - unidade - dezena) / 100) % 100;
+
+
+			if(centena > 1){
+				cout << centena << " centenas, ";
+			}else if(centena == 0){
+				cout << "";
+			}else{
+				cout << centena << " centena, ";
+			}
+			
+			if(dezena > 1){
+				cout << dezena << " dezenas, ";
+			}else if(dezena == 0){
+				cout << " ";
+			}else{
+				cout << dezena << " dezena, ";
+			}
+			
+			if(unidade > 1 && dezena == 0 && centena == 0){
+				cout << unidade << " unidades" << endl;
+			}else if(unidade == 1){
+				cout << unidade << " unidade" << endl;
+			}else if(unidade == 0){
+				cout << "" << endl;
+			}else{
+				cout << "e " << unidade << " unidades" << endl;
+
+			}
+			
+			
+		}else{
+			cout << "Numero precisa estar no intervalo entre 1 e 999.\n\n";
+		}
 	}
 	
+	system("pause");
 	return 0;
 }
