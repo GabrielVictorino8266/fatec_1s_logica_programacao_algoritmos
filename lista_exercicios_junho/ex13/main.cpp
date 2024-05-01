@@ -66,13 +66,8 @@ int main(int argc, char** argv) {
 		}else{
 			cout << "CPF INVALIDO" << endl;
 		}
-		
-		
 	}
 	
 
-	
-
-	
 	return 0;
 }
