@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdlib.h>
+#include <string.h>
  
 using namespace std;
 
@@ -9,50 +9,65 @@ using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
-	int d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11; 
-	int soma=0, resto=0;
-	bool dv_1 = false, dv_2 = false;
-
+	int soma=0, resultado = 0, digito10, digito11, digito=0;
+	char cpf[11];
 	
-	cout << "Informe seu cpf (sem pontos.)" << endl;
-	cin >> d1 >> d2 >> d3 >> d4 >> d5 >> d6 >> d7 >> d8 >> d9 >> d10 >> d11;
+	cout << "Informe o cpf (Sem espaços e pontos). \n\n";
+	cin >> cpf;
 	
-
-	
-
-	
-	
-	if((d1 == d2) && (d2 == 3) && (d3 == d4) && (d4 == d5) && (d5 == d6) && (d6 == d7) && (d7 == d8) && (d8 == d9) && (d9 == 10) && (d10 == d11)){
-		cout << "****************************************CPF INVALIDO****************************************" << endl;
+	if(strlen(cpf) != 11){
+		cout << "Cpf nao possui 11 numeros.\n";
+		return 0;
+	}else if(
+			(strcmp(cpf,"00000000000") == 0) || (strcmp(cpf,"11111111111") == 0) || (strcmp(cpf,"22222222222") == 0) ||
+            (strcmp(cpf,"33333333333") == 0) || (strcmp(cpf,"44444444444") == 0) || (strcmp(cpf,"55555555555") == 0) ||
+            (strcmp(cpf,"66666666666") == 0) || (strcmp(cpf,"77777777777") == 0) || (strcmp(cpf,"88888888888") == 0) ||
+            (strcmp(cpf,"99999999999") == 0)
+	){
+		cout << "Todos os numeros repetidos.\n\n";
+		return 0;
 	}else{
-		//primeiro digito
-		soma = d1 * 10 + d2 * 9 + d3 * 8 + d4 * 7 + d5 * 6 + d6 * 5 + d7 * 4 + d8 * 3 + d9 * 2;
-		
-		resto = soma*10 % 11;
-		cout << "Primeiro digito: " << resto << endl;
-		
-		if(d10 == resto){
-			dv_1 = true;
-		}		
-			
 
-			//segundo digito
-			soma = 0;
-			soma = d1 * 11 + d2 * 10 + d3 * 9 + d4 * 8 + d5 * 7 + d6 * 6 + d7 * 5 + d8 * 4 + d9 * 3 + d10 * 2;
+
+//digito verificador 1		
+		for(int i = 0; i < 9; i++){
+			digito = cpf[i]-'0';
+//			cout << digito << endl;
+			soma+= digito * (10 - i);
+//			cout << soma << endl;
+		}
+		
+		digito10 = (soma * 10) % 11;
+		
+		if(digito10 == 10 || digito10 == 11){
+			digito10 = 0;
+		}
+		
+		
+//digito verificador 2
+	soma = 0;
+		for(int i = 0; i < 10; i++){
+			digito = cpf[i]-'0';
+//			cout << digito << endl;
+			soma+= digito * (11 - i);
+//			cout << soma << endl;
+		}
+		
+		
+		digito11 = (soma * 10) % 11;
+		
+		if(digito11 == 10 || digito11 == 11){
+			digito10 = 0;
+		}
+		
+		if(digito10 == cpf[9]-'0' && digito11 == cpf[10]-'0'){
+			cout << "CPF VALIDO!" << endl;
 			
-			resto = soma*10 % 11;
-			cout << "Segundo digito: " << resto << endl;
-			
-	
-			if(d11 == resto){
-				dv_2 = true;
-			}			
-				
-		if(dv_1 == true && dv_2 == true){
-			cout << "CPF VALIDO" << endl;
 		}else{
 			cout << "CPF INVALIDO" << endl;
 		}
+		
+		
 	}
 	
 
