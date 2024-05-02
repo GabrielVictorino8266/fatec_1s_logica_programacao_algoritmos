@@ -27,6 +27,6 @@ sort(numeros, numeros + 3, greater
 ***Apenas lembre-se de importar o `#include <algorithm>`
 
 
-Exercícios de 13 a n:
+Exercícios de 13 a 20
 
 * <string.h>, usar strcmp()
