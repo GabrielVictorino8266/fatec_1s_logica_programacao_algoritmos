@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX_PRODUTOS = 10;
+
+void cadastrarProduto(string produtos[], float precos[], int& numProdutos) {
+    if (numProdutos >= MAX_PRODUTOS) {
+        cout << "Limite máximo de produtos atingido." << endl;
+        return;
+    }
+    string nomeProduto;
+    float precoProduto;
+    cout << "Digite o nome do produto: ";
+    cin >> nomeProduto;
+    cout << "Digite o preço do produto: ";
+    cin >> precoProduto;
+    produtos[numProdutos] = nomeProduto;
+    precos[numProdutos] = precoProduto;
+    numProdutos++;
+    cout << "Produto cadastrado com sucesso!" << endl;
+}
+
+void consultarProdutos(string produtos[], int numProdutos) {
+    cout << "Produtos cadastrados:" << endl;
+    for (int i = 0; i < numProdutos; i++) {
+        cout << produtos[i] << endl;
+    }
+}
+
+void consultarPreco(string produtos[], float precos[], int numProdutos) {
+    string nomeProduto;
+    cout << "Digite o nome do produto para consultar o preço: ";
+    cin >> nomeProduto;
+    for (int i = 0; i < numProdutos; i++) {
+        if (produtos[i] == nomeProduto) {
+            cout << "Preço do produto '" << nomeProduto << "': R$" << precos[i] << endl;
+            return;
+        }
+    }
+    cout << "Produto não encontrado." << endl;
+}
+
+void mostrarDesconto(string produtos[], float precos[], int numProdutos) {
+    string nomeProduto;
+    cout << "Digite o nome do produto para calcular o desconto: ";
+    cin >> nomeProduto;
+    for (int i = 0; i < numProdutos; i++) {
+        if (produtos[i] == nomeProduto) {
+            float desconto = precos[i] * 0.1;  // 10% de desconto
+            float precoComDesconto = precos[i] - desconto;
+            cout << "Preço com desconto do produto '" << nomeProduto << "': R$" << precoComDesconto << endl;
+            return;
+        }
+    }
+    cout << "Produto não encontrado." << endl;
+}
+
+int main() {
+    string produtos[MAX_PRODUTOS];
+    float precos[MAX_PRODUTOS];
+    int numProdutos = 0;
+    int opcao;
+
+    do {
+        cout << "\nMenu:" << endl;
+        cout << "1 - Cadastro de Produtos" << endl;
+        cout << "2 - Consulta de Produtos" << endl;
+        cout << "3 - Consulta de Preços" << endl;
+        cout << "4 - Mostra Desconto" << endl;
+        cout << "5 - Sair" << endl;
+        cout << "Digite o número da opção desejada: ";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                cadastrarProduto(produtos, precos, numProdutos);
+                break;
+            case 2:
+                consultarProdutos(produtos, numProdutos);
+                break;
+            case 3:
+                consultarPreco(produtos, precos, numProdutos);
+                break;
+            case 4:
+                mostrarDesconto(produtos, precos, numProdutos);
+                break;
+            case 5:
+                cout << "Encerrando o programa..." << endl;
+                break;
+            default:
+                cout << "Opção inválida. Digite um número válido." << endl;
+                break;
+        }
+    } while (opcao != 5);
+
+    return 0;
+}

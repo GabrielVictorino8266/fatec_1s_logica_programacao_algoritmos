@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    vector <int> vetor;
+    vector <int> vetor;0
     int numero_a_inserir = 0;
     int MAIOR = 0;
     int posicao_maior = 0;
